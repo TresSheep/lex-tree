@@ -1,0 +1,3 @@
+/home/edvin/syntax-three/CMakeFiles/rebuild_cache.dir
+/home/edvin/syntax-three/CMakeFiles/st.dir
+/home/edvin/syntax-three/CMakeFiles/edit_cache.dir
