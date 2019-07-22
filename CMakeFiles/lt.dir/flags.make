@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = -DLINUX -DUNICODE -D_UNICODE
 
-CXX_INCLUDES = -I/home/edvin/syntax-three/src 
+CXX_INCLUDES = -I/home/edvin/lex-tree/src 
 

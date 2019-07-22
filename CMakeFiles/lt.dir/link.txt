@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/lt.dir/src/ast.cpp.o CMakeFiles/lt.dir/src/builder.cpp.o CMakeFiles/lt.dir/src/lexer.cpp.o CMakeFiles/lt.dir/src/main.cpp.o  -o bin/lt 

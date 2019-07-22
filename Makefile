@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/edvin/syntax-three
+CMAKE_SOURCE_DIR = /home/edvin/lex-tree
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/edvin/syntax-three
+CMAKE_BINARY_DIR = /home/edvin/lex-tree
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edvin/syntax-three/CMakeFiles /home/edvin/syntax-three/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edvin/lex-tree/CMakeFiles /home/edvin/lex-tree/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/edvin/syntax-three/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/edvin/lex-tree/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,98 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named st
+# Target rules for targets named lt
 
 # Build rule for target.
-st: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 st
-.PHONY : st
+lt: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lt
+.PHONY : lt
 
 # fast build rule for target.
-st/fast:
-	$(MAKE) -f CMakeFiles/st.dir/build.make CMakeFiles/st.dir/build
-.PHONY : st/fast
+lt/fast:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/build
+.PHONY : lt/fast
+
+src/ast.o: src/ast.cpp.o
+
+.PHONY : src/ast.o
+
+# target to build an object file
+src/ast.cpp.o:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast.cpp.o
+.PHONY : src/ast.cpp.o
+
+src/ast.i: src/ast.cpp.i
+
+.PHONY : src/ast.i
+
+# target to preprocess a source file
+src/ast.cpp.i:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast.cpp.i
+.PHONY : src/ast.cpp.i
+
+src/ast.s: src/ast.cpp.s
+
+.PHONY : src/ast.s
+
+# target to generate assembly for a file
+src/ast.cpp.s:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast.cpp.s
+.PHONY : src/ast.cpp.s
+
+src/builder.o: src/builder.cpp.o
+
+.PHONY : src/builder.o
+
+# target to build an object file
+src/builder.cpp.o:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/builder.cpp.o
+.PHONY : src/builder.cpp.o
+
+src/builder.i: src/builder.cpp.i
+
+.PHONY : src/builder.i
+
+# target to preprocess a source file
+src/builder.cpp.i:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/builder.cpp.i
+.PHONY : src/builder.cpp.i
+
+src/builder.s: src/builder.cpp.s
+
+.PHONY : src/builder.s
+
+# target to generate assembly for a file
+src/builder.cpp.s:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/builder.cpp.s
+.PHONY : src/builder.cpp.s
+
+src/lexer.o: src/lexer.cpp.o
+
+.PHONY : src/lexer.o
+
+# target to build an object file
+src/lexer.cpp.o:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/lexer.cpp.o
+.PHONY : src/lexer.cpp.o
+
+src/lexer.i: src/lexer.cpp.i
+
+.PHONY : src/lexer.i
+
+# target to preprocess a source file
+src/lexer.cpp.i:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/lexer.cpp.i
+.PHONY : src/lexer.cpp.i
+
+src/lexer.s: src/lexer.cpp.s
+
+.PHONY : src/lexer.s
+
+# target to generate assembly for a file
+src/lexer.cpp.s:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/lexer.cpp.s
+.PHONY : src/lexer.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -129,7 +210,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/st.dir/build.make CMakeFiles/st.dir/src/main.cpp.o
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -138,7 +219,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/st.dir/build.make CMakeFiles/st.dir/src/main.cpp.i
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -147,7 +228,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/st.dir/build.make CMakeFiles/st.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -157,8 +238,17 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... st"
+	@echo "... lt"
 	@echo "... edit_cache"
+	@echo "... src/ast.o"
+	@echo "... src/ast.i"
+	@echo "... src/ast.s"
+	@echo "... src/builder.o"
+	@echo "... src/builder.i"
+	@echo "... src/builder.s"
+	@echo "... src/lexer.o"
+	@echo "... src/lexer.i"
+	@echo "... src/lexer.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

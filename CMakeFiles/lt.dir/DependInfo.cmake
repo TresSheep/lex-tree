@@ -4,7 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/edvin/syntax-three/src/main.cpp" "/home/edvin/syntax-three/CMakeFiles/st.dir/src/main.cpp.o"
+  "/home/edvin/lex-tree/src/ast.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/ast.cpp.o"
+  "/home/edvin/lex-tree/src/builder.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/builder.cpp.o"
+  "/home/edvin/lex-tree/src/lexer.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/lexer.cpp.o"
+  "/home/edvin/lex-tree/src/main.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
