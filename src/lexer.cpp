@@ -51,13 +51,102 @@ void lexer::lex(std::string str)
     }
     else if (str[position] == ' ')
       position += 0; // Do nothing
-    else if (str[position] == '\n')
+    else if (str[position] == '\n' || str[position] == '\r')
     {
       token_t token;
       token.type = NEWLINE;
       token.content = '\n';
       m_token_stream.push_back(token);
       position += 0;
+    }
+    else if (str[position] == ':')
+    {
+      token_t token;
+      token.type = SEPARATOR;
+      token.content = ':';
+      m_token_stream.push_back(token);
+      position += 0;
+    }
+    else if (str[position] == '(')
+    {
+      token_t token;
+      token.type = OPEN_P;
+      token.content = '(';
+      m_token_stream.push_back(token);
+      position += 0;
+    }
+    else if (str[position] == ')')
+    {
+      token_t token;
+      token.type = CLOSE_P;
+      token.content = ')';
+      m_token_stream.push_back(token);
+      position += 0;
+    }
+    else if (str[position] == '{')
+    {
+      token_t token;
+      token.type = OPEN_BLOCK;
+      token.content = '{';
+      m_token_stream.push_back(token);
+      position += 0;
+    }
+    else if (str[position] == '}')
+    {
+      token_t token;
+      token.type = CLOSE_BLOCK;
+      token.content = '}';
+      m_token_stream.push_back(token);
+      position += 0;
+    }
+    else if (str[position] == '<' && str[position+1] == '-' && str[position+2] == '-' && str[position+3] == '-' && str[position+4] == '>')
+    {
+      token_t token;
+      token.type = SECTION_SEPARATOR;
+      token.content = "<--->";
+      m_token_stream.push_back(token);
+      position += 4;
+    }
+    else if (str[position] == '\"')
+    {
+      position++;
+      token_t token;
+      token.type = TOKEN;
+      while (str[position] != '\"')
+      {
+	token.content += str[position];
+	position++;
+
+	if (position > str.length())
+	  break;
+      }
+      m_token_stream.push_back(token);
+    }
+    else if (IS_HIGH_ALPHA(str[position]) || IS_LOW_ALPHA(str[position])) {
+      token_t token;
+      token.type = IDENTIFIER;
+      while (IS_HIGH_ALPHA(str[position]) || IS_LOW_ALPHA(str[position]) || IS_NUMBER(str[position])) {
+	token.content += str[position];
+	position++;
+      }
+      position--;
+      m_token_stream.push_back(token);
+    }
+    else if (IS_NUMBER(str[position])) {
+      bool hex = false;
+      token_t token;
+      token.type = DEC_NUMBER;
+      if (str[position] == '0' && str[position + 1] == 'x') {
+	position++;
+
+	if (position > str.length())
+	{
+	  m_token_stream.push_back(token);
+	  return;
+	}
+      }
+      position--;
+      m_token_stream.push_back(token);
     }
     else if (IS_HIGH_ALPHA(str[position]) || IS_LOW_ALPHA(str[position])) {
       token_t token;

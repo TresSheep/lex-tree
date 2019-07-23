@@ -1,7 +1,7 @@
 // Lexer section
 
 proto_separator "::"
-identifier "[A-Z][a-z]_*[0-9]"
+identifier "[A-Z][a-z]*[0-9]"
 number "[0-9]"
 dot "."
 separator ","
@@ -11,10 +11,11 @@ separator ","
 // AST section
 
 expression:
-  // First "|" then token <what can come after>
-  | write_cmd <identifier number>
+  // (what can come after)
+  write_cmd (identifier number)
   {
   }
-  | read_cmd <identifier number>
+  
+  read_cmd (identifier number)
   {
   }

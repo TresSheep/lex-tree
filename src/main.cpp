@@ -16,7 +16,10 @@ int main(int argc, char** argv)
 
   lexer l(filename);
   builder b;
-  ast(l.get_token_stream(), b);
+  ast stx(l.get_token_stream(), b);
+  stx.parse();
+
+  b.save();
   
   return 0;
 }

@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/edvin/lex-tree/src/ast.cpp
+ast.h
+/home/edvin/lex-tree/src/ast.h
+
 /home/edvin/lex-tree/src/ast.h
 lexer.h
 /home/edvin/lex-tree/src/lexer.h
@@ -20,6 +24,10 @@ memory
 builder.h
 /home/edvin/lex-tree/src/ast/builder.h
 
+/home/edvin/lex-tree/src/builder.cpp
+builder.h
+/home/edvin/lex-tree/src/builder.h
+
 /home/edvin/lex-tree/src/builder.h
 string
 -
@@ -29,6 +37,12 @@ fstream
 -
 iostream
 -
+sstream
+-
+
+/home/edvin/lex-tree/src/lexer.cpp
+lexer.h
+/home/edvin/lex-tree/src/lexer.h
 
 /home/edvin/lex-tree/src/lexer.h
 string
