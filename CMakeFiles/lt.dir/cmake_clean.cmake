@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/lt.dir/src/ast.cpp.o"
+  "CMakeFiles/lt.dir/src/ast/case.cpp.o"
+  "CMakeFiles/lt.dir/src/ast/function.cpp.o"
   "CMakeFiles/lt.dir/src/builder.cpp.o"
   "CMakeFiles/lt.dir/src/lexer.cpp.o"
   "CMakeFiles/lt.dir/src/main.cpp.o"

@@ -20,7 +20,35 @@ ast/expression.h
 memory
 -
 
+/home/edvin/lex-tree/src/ast/case.cpp
+case.h
+/home/edvin/lex-tree/src/ast/case.h
+
+/home/edvin/lex-tree/src/ast/case.h
+builder.h
+/home/edvin/lex-tree/src/ast/builder.h
+expression.h
 /home/edvin/lex-tree/src/ast/expression.h
+vector
+-
+
+/home/edvin/lex-tree/src/ast/expression.h
+builder.h
+/home/edvin/lex-tree/src/ast/builder.h
+
+/home/edvin/lex-tree/src/ast/function.cpp
+function.h
+/home/edvin/lex-tree/src/ast/function.h
+
+/home/edvin/lex-tree/src/ast/function.h
+builder.h
+/home/edvin/lex-tree/src/ast/builder.h
+statement.h
+/home/edvin/lex-tree/src/ast/statement.h
+vector
+-
+
+/home/edvin/lex-tree/src/ast/statement.h
 builder.h
 /home/edvin/lex-tree/src/ast/builder.h
 
@@ -67,4 +95,16 @@ builder.h
 /home/edvin/lex-tree/src/builder.h
 ast.h
 /home/edvin/lex-tree/src/ast.h
+
+src/builder.h
+string
+-
+vector
+-
+fstream
+-
+iostream
+-
+sstream
+-
 

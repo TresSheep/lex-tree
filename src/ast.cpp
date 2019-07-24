@@ -75,6 +75,8 @@ void ast::parse()
 	    tokens_to_come_after.push_back(m_token_stream[position].content);
 	    position++;
 	  }
+
+	  // Add case
 	}
 	else
 	{

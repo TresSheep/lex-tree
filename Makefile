@@ -150,6 +150,60 @@ src/ast.cpp.s:
 	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast.cpp.s
 .PHONY : src/ast.cpp.s
 
+src/ast/case.o: src/ast/case.cpp.o
+
+.PHONY : src/ast/case.o
+
+# target to build an object file
+src/ast/case.cpp.o:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/case.cpp.o
+.PHONY : src/ast/case.cpp.o
+
+src/ast/case.i: src/ast/case.cpp.i
+
+.PHONY : src/ast/case.i
+
+# target to preprocess a source file
+src/ast/case.cpp.i:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/case.cpp.i
+.PHONY : src/ast/case.cpp.i
+
+src/ast/case.s: src/ast/case.cpp.s
+
+.PHONY : src/ast/case.s
+
+# target to generate assembly for a file
+src/ast/case.cpp.s:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/case.cpp.s
+.PHONY : src/ast/case.cpp.s
+
+src/ast/function.o: src/ast/function.cpp.o
+
+.PHONY : src/ast/function.o
+
+# target to build an object file
+src/ast/function.cpp.o:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/function.cpp.o
+.PHONY : src/ast/function.cpp.o
+
+src/ast/function.i: src/ast/function.cpp.i
+
+.PHONY : src/ast/function.i
+
+# target to preprocess a source file
+src/ast/function.cpp.i:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/function.cpp.i
+.PHONY : src/ast/function.cpp.i
+
+src/ast/function.s: src/ast/function.cpp.s
+
+.PHONY : src/ast/function.s
+
+# target to generate assembly for a file
+src/ast/function.cpp.s:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/function.cpp.s
+.PHONY : src/ast/function.cpp.s
+
 src/builder.o: src/builder.cpp.o
 
 .PHONY : src/builder.o
@@ -243,6 +297,12 @@ help:
 	@echo "... src/ast.o"
 	@echo "... src/ast.i"
 	@echo "... src/ast.s"
+	@echo "... src/ast/case.o"
+	@echo "... src/ast/case.i"
+	@echo "... src/ast/case.s"
+	@echo "... src/ast/function.o"
+	@echo "... src/ast/function.i"
+	@echo "... src/ast/function.s"
 	@echo "... src/builder.o"
 	@echo "... src/builder.i"
 	@echo "... src/builder.s"
