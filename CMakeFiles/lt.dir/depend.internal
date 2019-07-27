@@ -10,7 +10,7 @@ CMakeFiles/lt.dir/src/ast.cpp.o
 CMakeFiles/lt.dir/src/ast/case.cpp.o
  /home/edvin/lex-tree/src/ast/case.cpp
  /home/edvin/lex-tree/src/ast/case.h
- /home/edvin/lex-tree/src/ast/expression.h
+ /home/edvin/lex-tree/src/ast/statement.h
  src/builder.h
 CMakeFiles/lt.dir/src/ast/function.cpp.o
  /home/edvin/lex-tree/src/ast/function.cpp

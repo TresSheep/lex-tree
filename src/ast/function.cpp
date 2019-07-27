@@ -1,7 +1,7 @@
 #include "function.h"
 
-function::function(std::string name, std::vector<statement> body) :
-  m_name(name), m_body(body)
+function::function(std::string name, std::vector<std::unique_ptr<statement>> body) :
+  m_name(name), m_body(std::move(body))
 {
 }
 

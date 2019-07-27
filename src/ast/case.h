@@ -1,10 +1,10 @@
 #pragma once
 
 #include "builder.h"
-#include "expression.h"
+#include "statement.h"
 #include <vector>
 
-class _case : public expression
+class _case : public statement
 {
  public:
   _case(std::string name, std::vector<std::string> tokens_to_come_after);
