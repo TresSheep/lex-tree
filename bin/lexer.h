@@ -11,6 +11,12 @@ enum token_type
 proto_separator,
 dot,
 separator,
+end_statement,
+arrow,
+open_p,
+close_p,
+open_block,
+close_block,
 
 };
 

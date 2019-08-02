@@ -3,6 +3,9 @@
 #include "lexer.h"
 #include "builder.h"
 #include "ast/expression.h"
+#include "ast/function.h"
+#include "ast/statement.h"
+#include "ast/case.h"
 #include <memory>
 
 class ast
@@ -17,5 +20,6 @@ class ast
   std::vector<token_t> m_token_stream;
   size_t m_line;
   builder& m_builder;
-  std::vector<std::unique_ptr<expression>> m_exprs;
+  std::vector<std::unique_ptr<statement>> m_exprs;
+  std::unique_ptr<expression> m_expression;
 };

@@ -13,6 +13,8 @@ void ast::parse()
 {
   bool lexer_section = true;
   size_t line = 1;
+  std::string label_name = "";
+  std::vector<std::string> after_case;
   
   for (auto position = 0; position < m_token_stream.size(); position++)
   {
@@ -61,15 +63,45 @@ void ast::parse()
 	{
 	  // Function
 
+	  if (!m_exprs.empty())
+	  {
+	    function f(label_name, std::move(m_exprs));
+	    f.generate_code(m_builder);
+	    m_exprs.clear();
+	  }
+
+	  label_name = m_token_stream[position].content;
+
 	  position++;
 	}
-	else if (m_token_stream[position+1].type == OPEN_P)
+	else if (m_token_stream[position+1].type == OPEN_P || m_token_stream[position+1].type == IDENTIFIER)
 	{
 	  // Case
 
-	  position += 2;
-	  std::vector<std::string> tokens_to_come_after;
+	  std::vector<std::string> names;
+	  while (m_token_stream[position].type == IDENTIFIER)
+	  {
+	    names.push_back(m_token_stream[position].content);
+	    position++;
+	  }
+
+	  // Check if parent or declaration of what can come after
 	  
+	  bool is_child = false;
+	  for (auto name : names)
+	  {
+	    for (auto token : after_case)
+	    {
+	      if (token.compare(name) == 0)
+	      {
+	        is_child = true;
+	        break;
+	      }
+	    }
+	  }
+
+	  position++;
+	  std::vector<std::string> tokens_to_come_after;
 	  while (m_token_stream[position].type != CLOSE_P)
 	  {
 	    tokens_to_come_after.push_back(m_token_stream[position].content);
@@ -77,6 +109,11 @@ void ast::parse()
 	  }
 
 	  // Add case
+	  m_exprs.push_back(std::move(std::make_unique<_case>(names, tokens_to_come_after, is_child)));
+	  if (!is_child)
+	  {
+	    after_case = tokens_to_come_after;
+	  }
 	}
 	else
 	{
@@ -87,12 +124,6 @@ void ast::parse()
       case NEWLINE:
 	line++;
 	break;
-      case OPEN_BLOCK:
-      {
-      } break;
-      case CLOSE_BLOCK:
-      {
-      } break;
       default:
 	std::cout << "ERROR: unexpeted token: " << m_token_stream[position].content << "! Line: " << line << "\n";
 	exit(0);
@@ -100,4 +131,8 @@ void ast::parse()
       }
     }
   }
+
+  function f(label_name, std::move(m_exprs));
+  f.generate_code(m_builder);
+  m_exprs.clear();
 }

@@ -77,6 +77,54 @@ token.content = ",";
 m_token_stream.push_back(token);
 position += 0;
 }
+if (str[position+0] == ';')
+{
+token_t token;
+token.type = end_statement;
+token.content = ";";
+m_token_stream.push_back(token);
+position += 0;
+}
+if (str[position+0] == '-'&&str[position+1] == '>')
+{
+token_t token;
+token.type = arrow;
+token.content = "->";
+m_token_stream.push_back(token);
+position += 1;
+}
+if (str[position+0] == '(')
+{
+token_t token;
+token.type = open_p;
+token.content = "(";
+m_token_stream.push_back(token);
+position += 0;
+}
+if (str[position+0] == ')')
+{
+token_t token;
+token.type = close_p;
+token.content = ")";
+m_token_stream.push_back(token);
+position += 0;
+}
+if (str[position+0] == '{')
+{
+token_t token;
+token.type = open_block;
+token.content = "{";
+m_token_stream.push_back(token);
+position += 0;
+}
+if (str[position+0] == '}')
+{
+token_t token;
+token.type = close_block;
+token.content = "}";
+m_token_stream.push_back(token);
+position += 0;
+}
 
 }
 }

@@ -5,17 +5,23 @@ identifier "[A-Z][a-z]*[0-9]"
 number "[0-9]"
 dot "."
 separator ","
+end_statement ";"
+arrow "->"
+open_p "("
+close_p ")"
+open_block "{"
+close_block "}"
 
 <--->
 
 // AST section
 
-expression:
-  // (what can come after)
-  write_cmd (identifier number)
-  {
-  }
+main:
+
+  identifier proto_separator open_p close_p arrow identifier (open_block end_statement)
   
-  read_cmd (identifier number)
-  {
-  }
+    open_block ()
+      // Intern function
+
+    end_statement ()
+      // Extern function

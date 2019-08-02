@@ -110,6 +110,86 @@ void builder::add_token(std::string name, std::string content)
   m_lexer_h_stream << name << ",\n";
 }
 
+void builder::add_function_start(std::string name)
+{
+  if (name.compare("main") == 0)
+  {
+    m_ast_functions << "template <typename builder>\n";
+    m_ast_functions << "std::unique_ptr<" << name << "> ast<builder>::parse_" << name <<
+      "(size_t& position)\n{\n" <<
+      "switch (m_token_stream[position].type)\n{\ndefault:\nstd::cout << \"Unexpected token\";\nexit(0);\nbreak;\n";
+
+  }
+
+  m_ast_inl_stream << "parse_" << name << "(position);\n";
+}
+
+void builder::add_function_end()
+{
+  for (auto arg : m_case_args)
+  {
+  }
+  
+  m_ast_functions << "\n}\n}";
+}
+
+void builder::add_case(std::vector<std::string> args, std::vector<std::string> tokens_to_come_after, bool child)
+{
+  case_arg_t* arg;
+  arg->call_stack = args;
+  arg->after = tokens_to_come_after;
+
+  /*
+  if (child)
+  {
+    if (m_case_args.size() > 0)
+      arg->parent = m_case_args.back();
+    else
+      arg->parent = 0;
+  }
+  else
+    arg->parent = 0;
+  */
+
+  //m_case_args.push_back(arg);
+
+  /*
+  if (!child)
+  {
+    m_ast_functions << "case " << args[0] << ":\n{\n";
+
+    size_t i = 0;
+    for (auto token : args)
+    {
+      if (i != 0)
+      {
+        m_ast_functions << "if (!m_token_stream[position+" << std::to_string(i) << "].type != " << token << ")\n{\n"
+			<< "std::cout << \"ERROR: Expected token: \" << m_token_stream[position+" << std::to_string(i) << "].content << \" after token: \" << m_token_stream[position+" << std::to_string(i-1) << "].content;\nexit(0)\n}\n"
+		      << "std::string s" << std::to_string(i) << " = m_token_stream[position+" << std::to_string(i) << "].content;\n";
+      }
+ 
+      i++;
+    }
+
+    m_ast_functions << "position += " << std::to_string(i) << ";\n";
+
+    i = 0;
+    for (auto token : tokens_to_come_after)
+    {
+      m_ast_functions << "if (!m_token_stream[position+" << std::to_string(i) << "].type != " << token << ")\n{\n"
+		    << "std::cout << \"ERROR: Expected token: " << token << " after expression\";\nexit(0)\n}\n";
+
+      i++;
+    }
+
+
+    m_ast_functions << "\n} break;\n";
+    }
+  else
+  {
+  }*/
+}
+
 void builder::save()
 {
   std::ofstream lexer_h_stream("lexer.h");
@@ -164,16 +244,22 @@ void builder::save()
   std::ofstream ast_inl_stream("ast.inl");
 
   ast_inl_stream << "#include \"ast.h\"\ntemplate <typename builder>\n" <<
-    "ast<builder>::ast(std::vector<token_t> token_stream, builder& b)\n{\n}\n" <<
+    "ast<builder>::ast(std::vector<token_t> token_stream, builder& b) :\n" <<
+    "m_token_stream(token_stream), m_line(1), m_builder(b)\n{\n}\n" <<
     "template <typename builder>\nast<builder>::~ast()\n{\n}\n" <<
-    "template <typename builder>\nvoid ast<builder>::parse()\n{\n";
-
+    "template <typename builder>\nvoid ast<builder>::parse()\n{\n" <<
+    "for (size_t position = 0; position < m_token_stream.size(); position++)\n{\n";
+  
   ast_inl_stream << m_ast_inl_stream.str();
 
-  ast_inl_stream << "\n}";
+  ast_inl_stream << "\n}\n}\n";
+
+  ast_inl_stream << m_ast_functions.str();
   
   lexer_h_stream.close();
   lexer_cpp_stream.close();
   ast_h_stream.close();
   ast_inl_stream.close();
+
+  m_case_args.clear();
 }
