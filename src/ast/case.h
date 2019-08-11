@@ -9,6 +9,7 @@ class _case : public statement
  public:
   _case(std::vector<std::string> args, std::vector<std::string> tokens_to_come_after, bool parent);
   ~_case();
+  
   void generate_code(builder& b) override;
 
  private:

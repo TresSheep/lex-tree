@@ -115,79 +115,231 @@ void builder::add_function_start(std::string name)
   if (name.compare("main") == 0)
   {
     m_ast_functions << "template <typename builder>\n";
-    m_ast_functions << "std::unique_ptr<" << name << "> ast<builder>::parse_" << name <<
+    m_ast_functions << "void ast<builder>::parse_" << name <<
       "(size_t& position)\n{\n" <<
       "switch (m_token_stream[position].type)\n{\ndefault:\nstd::cout << \"Unexpected token\";\nexit(0);\nbreak;\n";
 
   }
 
   m_ast_inl_stream << "parse_" << name << "(position);\n";
+
+  m_current_function = name;
 }
 
 void builder::add_function_end()
 {
-  for (auto arg : m_case_args)
+  std::vector<size_t> checked;
+  std::vector<same_arg_t*> same_arg;
+  for (size_t i = 0; i < m_case_args.size(); i++)
   {
+    for (size_t j = 0; j < m_case_args.size(); j++)
+    {
+      if (m_case_args[j] != m_case_args[i])
+      {
+	if (m_case_args[j]->call_stack[0].compare(m_case_args[i]->call_stack[0]) == 0)
+	{
+	  bool is_checked = false;
+	  for (size_t c : checked)
+	  {
+	    if (i == c || j == c)
+	      is_checked = true;
+	  }
+
+	  if (!is_checked)
+	  {
+	    // Has the first arg togheter
+	    same_arg_t* s = new same_arg_t();
+	    s->arg1 = m_case_args[i];
+	    s->arg2 = m_case_args[j];
+	    s->index = 1;
+	    same_arg.push_back(s);
+	    
+	    // check is 2/3/4 ... is the same
+
+	    size_t x = 0;
+	    if (x <= m_case_args[j]->call_stack.size() || x <= m_case_args[i]->call_stack.size())
+	    {
+	      while (m_case_args[j]->call_stack[x].compare(m_case_args[i]->call_stack[x]) == 0)
+	      {
+		x++;
+		if (x > m_case_args[j]->call_stack.size() - 1 || x > m_case_args[i]->call_stack.size() - 1)
+		{
+		  break;
+		}
+
+		if (m_case_args[j]->call_stack[x].compare(m_case_args[i]->call_stack[x]) == 0)
+		{
+		  // The same
+		  same_arg_t* s = new same_arg_t();
+		  s->arg1 = m_case_args[i];
+		  s->arg2 = m_case_args[j];
+		  s->index = x + 1;
+		  same_arg.push_back(s);
+		}
+	      }
+	    }
+	    
+	    checked.push_back(i);
+	    checked.push_back(j);
+	  }
+	}
+      }
+    }
+  }
+  
+  // Process case
+  bool parent = false;
+  bool has_same = false;
+  for (auto _case : m_case_args)
+  {
+    for (auto arg : same_arg)
+    {
+      if (arg->arg1 == _case)
+      {
+	if (arg->index == 1)
+	{
+	  // Parent case
+	  m_ast_functions << "case " << arg->arg1->call_stack[arg->index - 1] << ":\n{\n";
+	  parent = true;
+	  has_same = true;
+	}
+	else
+	{
+	  // Child case but the same
+	  m_ast_functions << "if (m_token_stream[position+" << std::to_string(arg->index - 1) << "].type == " << arg->arg1->call_stack[arg->index - 1] << ")\n{\n";
+
+	  // Parse arg1 and arg2
+	  size_t x = 0;
+	  bool has_extra = false;
+	  for (auto call : arg->arg1->call_stack)
+	  {
+	    if (x == arg->index - 1)
+	    {
+	      m_ast_functions << "if (m_token_stream[position+" << std::to_string(x + 1) << "].type == " << arg->arg1->call_stack[x + 1] << ")\n{\n";
+	      has_extra = true;
+	    }
+	    x++;
+	  }
+
+	  m_ast_functions << arg->arg1->create;
+
+	  if (x > 1)
+	  {
+	    if (has_extra)
+	      m_ast_functions << "break;\n";
+	    m_ast_functions << "}\n";
+	  }
+
+	  x = 0;
+	  for (auto call : arg->arg2->call_stack)
+	  {
+	    if (x == arg->index - 1)
+	    {
+	      if (x + 1 < arg->arg2->call_stack.size())
+		m_ast_functions << "if (m_token_stream[position+" << std::to_string(x + 1) << "].type == " << arg->arg2->call_stack[x + 1] << ")\n{\n";
+	    }
+	    x++;
+	  }
+
+	  m_ast_functions << arg->arg2->create;
+	  
+	  m_ast_functions << "}\n";
+	}
+      }
+      else if (arg->arg2 == _case)
+      {
+	has_same = true;
+      }
+    }
+    
+    if (parent)
+      m_ast_functions << "\n} break;\n";
+
+    if (!has_same)
+    {
+      m_ast_functions << "case " << _case->call_stack[0] << ":\n{\n";
+
+      m_ast_functions << "std::string s1 = m_token_stream[position].content;\n";
+
+      size_t x = 0;
+      for (auto call : _case->call_stack)
+      {
+	if (x != 0)
+	{
+	  m_ast_functions << "if (m_token_stream[position+" << std::to_string(x) << "].type != " << call << ")\n{\n"
+			  << "std::cout << \"ERROR: Unexpected token! Line: \" << m_line << \"\\n\";\n"
+			  << "exit(0);\n}\n"
+			  << "std::string s" << std::to_string(x + 1) << " = m_token_stream[position+" << std::to_string(x) << "].content;\n";
+	}
+
+	x++;
+      }
+
+      m_ast_functions << _case->create;
+      m_ast_functions << "\n} break;\n";
+    }
+    else
+    {
+    }
+    
+    parent = false;
+    has_same = false;
   }
   
   m_ast_functions << "\n}\n}";
+
+  m_case_args.clear();
+  same_arg.clear();
+  m_functions.push_back(m_current_function);
+  m_current_function.clear();
 }
 
 void builder::add_case(std::vector<std::string> args, std::vector<std::string> tokens_to_come_after, bool child)
 {
-  case_arg_t* arg;
+  case_arg_t* arg = new case_arg_t();
   arg->call_stack = args;
   arg->after = tokens_to_come_after;
+  m_case_args.push_back(arg);
+}
 
-  /*
-  if (child)
+void builder::add_create(std::string obj, std::vector<size_t> args)
+{
+  if (m_current_function.compare("main") == 0)
   {
-    if (m_case_args.size() > 0)
-      arg->parent = m_case_args.back();
-    else
-      arg->parent = 0;
-  }
-  else
-    arg->parent = 0;
-  */
-
-  //m_case_args.push_back(arg);
-
-  /*
-  if (!child)
-  {
-    m_ast_functions << "case " << args[0] << ":\n{\n";
-
-    size_t i = 0;
-    for (auto token : args)
+    m_create = obj;
+    m_create += " obj(";
+    bool f = false;
+    for (auto arg : args)
     {
-      if (i != 0)
+      for (auto func : m_functions)
       {
-        m_ast_functions << "if (!m_token_stream[position+" << std::to_string(i) << "].type != " << token << ")\n{\n"
-			<< "std::cout << \"ERROR: Expected token: \" << m_token_stream[position+" << std::to_string(i) << "].content << \" after token: \" << m_token_stream[position+" << std::to_string(i-1) << "].content;\nexit(0)\n}\n"
-		      << "std::string s" << std::to_string(i) << " = m_token_stream[position+" << std::to_string(i) << "].content;\n";
+	for (auto _case : m_case_args)
+	{
+	  if (func.compare(_case->call_stack[arg - 1]) == 0)
+	  {
+	    // It is a function
+	    f = true;
+	  }
+	}
       }
- 
-      i++;
+
+      if (!f)
+      {
+	// It is not a function
+	m_create += "s";
+	m_create += std::to_string(arg);
+	m_create += ",";
+      }
+
+      f = false;
     }
+    if (m_create.back() == ',')
+      m_create.pop_back(); // ,
+    m_create += ");\nobj.generate_code(m_builder);\n";
+  }
 
-    m_ast_functions << "position += " << std::to_string(i) << ";\n";
-
-    i = 0;
-    for (auto token : tokens_to_come_after)
-    {
-      m_ast_functions << "if (!m_token_stream[position+" << std::to_string(i) << "].type != " << token << ")\n{\n"
-		    << "std::cout << \"ERROR: Expected token: " << token << " after expression\";\nexit(0)\n}\n";
-
-      i++;
-    }
-
-
-    m_ast_functions << "\n} break;\n";
-    }
-  else
-  {
-  }*/
+  m_case_args.back()->create = m_create;
+  m_create.clear();
 }
 
 void builder::save()

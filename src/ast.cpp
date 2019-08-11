@@ -124,6 +124,52 @@ void ast::parse()
       case NEWLINE:
 	line++;
 	break;
+      case CREATE:
+      {
+	std::vector<size_t> args_to_process;
+	std::string s1 = m_token_stream[position+1].content;
+	if (m_token_stream[position + 1].type != IDENTIFIER)
+	{
+	  std::cout << "ERROR: expected an identifier after \"create\"! Line: " << line << "\n";
+	  exit(0);
+	}
+
+	if (m_token_stream[position + 2].type != OPEN_P)
+	{
+	  std::cout << "ERROR: expected '(' in \"create\"! Line: " << line << "\n";
+	  exit(0);
+	}
+	
+	position += 3;
+	while (m_token_stream[position].type != CLOSE_P)
+	{
+	  if (m_token_stream[position].type == VAR)
+	  {
+	    // Get the arg index
+	    if (m_token_stream[position + 1].type != DEC_NUMBER)
+	    {
+	      std::cout << "ERROR: expected number after '$' in \"create\"! Line: " << line << "\n";
+	      exit(0);
+	    }
+
+	    position += 2;
+
+	    // Create arg in "create"
+	    args_to_process.push_back(std::stoi(m_token_stream[position - 1].content));
+	  }
+	  else if (m_token_stream[position].type == IDENTIFIER)
+	  {
+	    position++;
+	  }
+	  else
+	  {
+	    std::cout << "ERROR: expected '$' or identifier in \"create\"! Line: " << line << "\n";
+	    exit(0);
+	  }
+	}
+	
+	m_exprs.push_back(std::move(std::make_unique<create>(s1, args_to_process)));
+      } break;
       default:
 	std::cout << "ERROR: unexpeted token: " << m_token_stream[position].content << "! Line: " << line << "\n";
 	exit(0);

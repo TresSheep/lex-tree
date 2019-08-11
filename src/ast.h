@@ -6,6 +6,7 @@
 #include "ast/function.h"
 #include "ast/statement.h"
 #include "ast/case.h"
+#include "ast/create.h"
 #include <memory>
 
 class ast

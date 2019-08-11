@@ -177,6 +177,33 @@ src/ast/case.cpp.s:
 	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/case.cpp.s
 .PHONY : src/ast/case.cpp.s
 
+src/ast/create.o: src/ast/create.cpp.o
+
+.PHONY : src/ast/create.o
+
+# target to build an object file
+src/ast/create.cpp.o:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/create.cpp.o
+.PHONY : src/ast/create.cpp.o
+
+src/ast/create.i: src/ast/create.cpp.i
+
+.PHONY : src/ast/create.i
+
+# target to preprocess a source file
+src/ast/create.cpp.i:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/create.cpp.i
+.PHONY : src/ast/create.cpp.i
+
+src/ast/create.s: src/ast/create.cpp.s
+
+.PHONY : src/ast/create.s
+
+# target to generate assembly for a file
+src/ast/create.cpp.s:
+	$(MAKE) -f CMakeFiles/lt.dir/build.make CMakeFiles/lt.dir/src/ast/create.cpp.s
+.PHONY : src/ast/create.cpp.s
+
 src/ast/function.o: src/ast/function.cpp.o
 
 .PHONY : src/ast/function.o
@@ -300,6 +327,9 @@ help:
 	@echo "... src/ast/case.o"
 	@echo "... src/ast/case.i"
 	@echo "... src/ast/case.s"
+	@echo "... src/ast/create.o"
+	@echo "... src/ast/create.i"
+	@echo "... src/ast/create.s"
 	@echo "... src/ast/function.o"
 	@echo "... src/ast/function.i"
 	@echo "... src/ast/function.s"

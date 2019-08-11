@@ -18,7 +18,11 @@ enum token_type
  OPEN_P,
  CLOSE_P,
  OPEN_BLOCK,
- CLOSE_BLOCK
+ CLOSE_BLOCK,
+ CREATE,
+ VAR,
+ BOOLEAN,
+ ARROW
 };
 
 typedef struct token

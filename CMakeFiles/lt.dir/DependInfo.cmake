@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/edvin/lex-tree/src/ast.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/ast.cpp.o"
   "/home/edvin/lex-tree/src/ast/case.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/ast/case.cpp.o"
+  "/home/edvin/lex-tree/src/ast/create.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/ast/create.cpp.o"
   "/home/edvin/lex-tree/src/ast/function.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/ast/function.cpp.o"
   "/home/edvin/lex-tree/src/builder.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/builder.cpp.o"
   "/home/edvin/lex-tree/src/lexer.cpp" "/home/edvin/lex-tree/CMakeFiles/lt.dir/src/lexer.cpp.o"

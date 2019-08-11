@@ -99,6 +99,22 @@ void lexer::lex(std::string str)
       m_token_stream.push_back(token);
       position += 0;
     }
+    else if (str[position] == '$')
+    {
+      token_t token;
+      token.type = VAR;
+      token.content = '$';
+      m_token_stream.push_back(token);
+      position += 0;
+    }
+    else if (str[position] == '-' && str[position+1] == '>')
+    {
+      token_t token;
+      token.type = ARROW;
+      token.content = "->";
+      m_token_stream.push_back(token);
+      position += 1;
+    }
     else if (str[position] == '<' && str[position+1] == '-' && str[position+2] == '-' && str[position+3] == '-' && str[position+4] == '>')
     {
       token_t token;
@@ -122,31 +138,21 @@ void lexer::lex(std::string str)
       }
       m_token_stream.push_back(token);
     }
-    else if (IS_HIGH_ALPHA(str[position]) || IS_LOW_ALPHA(str[position])) {
+    else if (str[position] == 'c' && str[position+1] == 'r' && str[position+2] == 'e' && str[position+3] == 'a' && str[position+4] == 't' && str[position+5] == 'e')
+    {
       token_t token;
-      token.type = IDENTIFIER;
-      while (IS_HIGH_ALPHA(str[position]) || IS_LOW_ALPHA(str[position]) || IS_NUMBER(str[position])) {
-	token.content += str[position];
-	position++;
-      }
-      position--;
+      token.type = CREATE;
+      token.content = "create";
       m_token_stream.push_back(token);
+      position += 5;
     }
-    else if (IS_NUMBER(str[position])) {
-      bool hex = false;
+    else if (str[position] == 'b' && str[position+1] == 'o' && str[position+2] == 'o' && str[position+3] == 'l' && str[position+4] == 'e' && str[position+5] == 'a' && str[position+6] == 'n')
+    {
       token_t token;
-      token.type = DEC_NUMBER;
-      if (str[position] == '0' && str[position + 1] == 'x') {
-	position++;
-
-	if (position > str.length())
-	{
-	  m_token_stream.push_back(token);
-	  return;
-	}
-      }
-      position--;
+      token.type = BOOLEAN;
+      token.content = "boolean";
       m_token_stream.push_back(token);
+      position += 6;
     }
     else if (IS_HIGH_ALPHA(str[position]) || IS_LOW_ALPHA(str[position])) {
       token_t token;
@@ -163,15 +169,27 @@ void lexer::lex(std::string str)
       token_t token;
       token.type = DEC_NUMBER;
       if (str[position] == '0' && str[position + 1] == 'x')
-	token.type = HEX_NUMBER;
+      {
+	position++;
 
-      position += 2;
-      while (IS_NUMBER(str[position]) || str[position] == 'A' || str[position] == 'B' || str[position] == 'C' || str[position] == 'D' || str[position] == 'E' || str[position] == 'F') {
-	token.content += str[position];
+	if (position > str.length())
+	{
+	  m_token_stream.push_back(token);
+	  return;
+	}
+	position--;
+      }
+
+      std::string s = "";
+      while (IS_NUMBER(str[position]) || str[position] == 'A' || str[position] == 'B' || str[position] == 'C' || str[position] == 'D' || str[position] == 'E' || str[position] == 'F')
+      {
+	s += str[position];
 	position++;
       }
-      
       position--;
+
+      token.content = s;
+      
       m_token_stream.push_back(token);
     }
     else

@@ -18,7 +18,7 @@ parse_main(position);
 }
 }
 template <typename builder>
-std::unique_ptr<main> ast<builder>::parse_main(size_t& position)
+void ast<builder>::parse_main(size_t& position)
 {
 switch (m_token_stream[position].type)
 {
@@ -26,6 +26,34 @@ default:
 std::cout << "Unexpected token";
 exit(0);
 break;
+case identifier:
+{
+if (m_token_stream[position+1].type == identifier)
+{
+if (m_token_stream[position+2].type == separator)
+{
+command obj(s1,s2,s4);
+obj.generate_code(m_builder);
+break;
+}
+command obj(s1,s2);
+obj.generate_code(m_builder);
+}
+
+} break;
+case separator:
+{
+std::string s1 = m_token_stream[position].content;
+if (m_token_stream[position+1].type != function_start)
+{
+std::cout << "ERROR: Unexpected token! Line: " << m_line << "\n";
+exit(0);
+}
+std::string s2 = m_token_stream[position+1].content;
+test obj();
+obj.generate_code(m_builder);
+
+} break;
 
 }
 }

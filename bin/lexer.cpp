@@ -29,14 +29,6 @@ void lexer::lex(std::string str)
 {
 for (size_t position = 0; position < str.length(); position++)
 {
-if (str[position+0] == ':'&&str[position+1] == ':')
-{
-token_t token;
-token.type = proto_separator;
-token.content = "::";
-m_token_stream.push_back(token);
-position += 1;
-}
 if (IS_HIGH_ALPHA(str[position])||IS_LOW_ALPHA(str[position])||)
 {
 token_t token;
@@ -61,14 +53,6 @@ position++;
 position--;
 m_token_stream.push_back(token);
 }
-if (str[position+0] == '.')
-{
-token_t token;
-token.type = dot;
-token.content = ".";
-m_token_stream.push_back(token);
-position += 0;
-}
 if (str[position+0] == ',')
 {
 token_t token;
@@ -77,51 +61,11 @@ token.content = ",";
 m_token_stream.push_back(token);
 position += 0;
 }
-if (str[position+0] == ';')
+if (str[position+0] == ':')
 {
 token_t token;
-token.type = end_statement;
-token.content = ";";
-m_token_stream.push_back(token);
-position += 0;
-}
-if (str[position+0] == '-'&&str[position+1] == '>')
-{
-token_t token;
-token.type = arrow;
-token.content = "->";
-m_token_stream.push_back(token);
-position += 1;
-}
-if (str[position+0] == '(')
-{
-token_t token;
-token.type = open_p;
-token.content = "(";
-m_token_stream.push_back(token);
-position += 0;
-}
-if (str[position+0] == ')')
-{
-token_t token;
-token.type = close_p;
-token.content = ")";
-m_token_stream.push_back(token);
-position += 0;
-}
-if (str[position+0] == '{')
-{
-token_t token;
-token.type = open_block;
-token.content = "{";
-m_token_stream.push_back(token);
-position += 0;
-}
-if (str[position+0] == '}')
-{
-token_t token;
-token.type = close_block;
-token.content = "}";
+token.type = function_start;
+token.content = ":";
 m_token_stream.push_back(token);
 position += 0;
 }

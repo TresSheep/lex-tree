@@ -4,6 +4,7 @@
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast.cpp
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/case.h
+CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/create.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/expression.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/function.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/statement.h
@@ -14,6 +15,11 @@ CMakeFiles/lt.dir/src/ast/case.cpp.o: src/ast/case.cpp
 CMakeFiles/lt.dir/src/ast/case.cpp.o: src/ast/case.h
 CMakeFiles/lt.dir/src/ast/case.cpp.o: src/ast/statement.h
 CMakeFiles/lt.dir/src/ast/case.cpp.o: src/builder.h
+
+CMakeFiles/lt.dir/src/ast/create.cpp.o: src/ast/create.cpp
+CMakeFiles/lt.dir/src/ast/create.cpp.o: src/ast/create.h
+CMakeFiles/lt.dir/src/ast/create.cpp.o: src/ast/statement.h
+CMakeFiles/lt.dir/src/ast/create.cpp.o: src/builder.h
 
 CMakeFiles/lt.dir/src/ast/function.cpp.o: src/ast/function.cpp
 CMakeFiles/lt.dir/src/ast/function.cpp.o: src/ast/function.h
@@ -28,6 +34,7 @@ CMakeFiles/lt.dir/src/lexer.cpp.o: src/lexer.h
 
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/case.h
+CMakeFiles/lt.dir/src/main.cpp.o: src/ast/create.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/expression.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/function.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/statement.h

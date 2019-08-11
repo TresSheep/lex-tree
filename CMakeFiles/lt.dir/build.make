@@ -83,9 +83,22 @@ CMakeFiles/lt.dir/src/ast/case.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lt.dir/src/ast/case.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/edvin/lex-tree/src/ast/case.cpp -o CMakeFiles/lt.dir/src/ast/case.cpp.s
 
+CMakeFiles/lt.dir/src/ast/create.cpp.o: CMakeFiles/lt.dir/flags.make
+CMakeFiles/lt.dir/src/ast/create.cpp.o: src/ast/create.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lt.dir/src/ast/create.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lt.dir/src/ast/create.cpp.o -c /home/edvin/lex-tree/src/ast/create.cpp
+
+CMakeFiles/lt.dir/src/ast/create.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lt.dir/src/ast/create.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/edvin/lex-tree/src/ast/create.cpp > CMakeFiles/lt.dir/src/ast/create.cpp.i
+
+CMakeFiles/lt.dir/src/ast/create.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lt.dir/src/ast/create.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/edvin/lex-tree/src/ast/create.cpp -o CMakeFiles/lt.dir/src/ast/create.cpp.s
+
 CMakeFiles/lt.dir/src/ast/function.cpp.o: CMakeFiles/lt.dir/flags.make
 CMakeFiles/lt.dir/src/ast/function.cpp.o: src/ast/function.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lt.dir/src/ast/function.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lt.dir/src/ast/function.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lt.dir/src/ast/function.cpp.o -c /home/edvin/lex-tree/src/ast/function.cpp
 
 CMakeFiles/lt.dir/src/ast/function.cpp.i: cmake_force
@@ -98,7 +111,7 @@ CMakeFiles/lt.dir/src/ast/function.cpp.s: cmake_force
 
 CMakeFiles/lt.dir/src/builder.cpp.o: CMakeFiles/lt.dir/flags.make
 CMakeFiles/lt.dir/src/builder.cpp.o: src/builder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lt.dir/src/builder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/lt.dir/src/builder.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lt.dir/src/builder.cpp.o -c /home/edvin/lex-tree/src/builder.cpp
 
 CMakeFiles/lt.dir/src/builder.cpp.i: cmake_force
@@ -111,7 +124,7 @@ CMakeFiles/lt.dir/src/builder.cpp.s: cmake_force
 
 CMakeFiles/lt.dir/src/lexer.cpp.o: CMakeFiles/lt.dir/flags.make
 CMakeFiles/lt.dir/src/lexer.cpp.o: src/lexer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/lt.dir/src/lexer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/lt.dir/src/lexer.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lt.dir/src/lexer.cpp.o -c /home/edvin/lex-tree/src/lexer.cpp
 
 CMakeFiles/lt.dir/src/lexer.cpp.i: cmake_force
@@ -124,7 +137,7 @@ CMakeFiles/lt.dir/src/lexer.cpp.s: cmake_force
 
 CMakeFiles/lt.dir/src/main.cpp.o: CMakeFiles/lt.dir/flags.make
 CMakeFiles/lt.dir/src/main.cpp.o: src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/lt.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/lt.dir/src/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lt.dir/src/main.cpp.o -c /home/edvin/lex-tree/src/main.cpp
 
 CMakeFiles/lt.dir/src/main.cpp.i: cmake_force
@@ -139,6 +152,7 @@ CMakeFiles/lt.dir/src/main.cpp.s: cmake_force
 lt_OBJECTS = \
 "CMakeFiles/lt.dir/src/ast.cpp.o" \
 "CMakeFiles/lt.dir/src/ast/case.cpp.o" \
+"CMakeFiles/lt.dir/src/ast/create.cpp.o" \
 "CMakeFiles/lt.dir/src/ast/function.cpp.o" \
 "CMakeFiles/lt.dir/src/builder.cpp.o" \
 "CMakeFiles/lt.dir/src/lexer.cpp.o" \
@@ -149,13 +163,14 @@ lt_EXTERNAL_OBJECTS =
 
 bin/lt: CMakeFiles/lt.dir/src/ast.cpp.o
 bin/lt: CMakeFiles/lt.dir/src/ast/case.cpp.o
+bin/lt: CMakeFiles/lt.dir/src/ast/create.cpp.o
 bin/lt: CMakeFiles/lt.dir/src/ast/function.cpp.o
 bin/lt: CMakeFiles/lt.dir/src/builder.cpp.o
 bin/lt: CMakeFiles/lt.dir/src/lexer.cpp.o
 bin/lt: CMakeFiles/lt.dir/src/main.cpp.o
 bin/lt: CMakeFiles/lt.dir/build.make
 bin/lt: CMakeFiles/lt.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable bin/lt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/edvin/lex-tree/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable bin/lt"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lt.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

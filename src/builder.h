@@ -10,8 +10,16 @@ typedef struct case_arg
 {
   std::vector<std::string> call_stack;
   std::vector<std::string> after;
-  case_arg* parent;
+  std::string create;
 } case_arg_t;
+
+typedef struct same_arg
+{
+  // Maybe make a vector of args
+  case_arg_t* arg1;
+  case_arg_t* arg2;
+  size_t index;
+} same_arg_t;
 
 class builder
 {
@@ -24,6 +32,8 @@ class builder
   void add_function_end();
 
   void add_case(std::vector<std::string> args, std::vector<std::string> tokens_to_come_after, bool child);
+
+  void add_create(std::string obj, std::vector<size_t> args);
   
   void save();
   
@@ -32,6 +42,9 @@ class builder
   std::stringstream m_lexer_h_stream;
   std::stringstream m_ast_inl_stream;
   std::stringstream m_ast_functions;
+  std::string       m_create;
+  std::string       m_current_function;
+  std::vector<std::string> m_functions;
 
   std::vector<case_arg_t*> m_case_args;
 };

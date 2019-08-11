@@ -1,27 +1,24 @@
 // Lexer section
 
-proto_separator "::"
 identifier "[A-Z][a-z]*[0-9]"
 number "[0-9]"
-dot "."
 separator ","
-end_statement ";"
-arrow "->"
-open_p "("
-close_p ")"
-open_block "{"
-close_block "}"
+function_start ":"
 
 <--->
 
 // AST section
 
+// global variables
+//data_section -> boolean
+//code_section -> boolean
+
 main:
+    identifier identifier separator identifier ()
+        create command ($1 $2 $4)
 
-  identifier proto_separator open_p close_p arrow identifier (open_block end_statement)
-  
-    open_block ()
-      // Intern function
+     identifier identifier ()
+        create command ($1 $2)
 
-    end_statement ()
-      // Extern function
+     separator function_start ()
+        create test ()
