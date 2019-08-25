@@ -294,11 +294,10 @@ void builder::add_function_end()
   m_current_function.clear();
 }
 
-void builder::add_case(std::vector<std::string> args, std::vector<std::string> tokens_to_come_after, bool child)
+void builder::add_case(std::vector<std::string> args)
 {
   case_arg_t* arg = new case_arg_t();
   arg->call_stack = args;
-  arg->after = tokens_to_come_after;
   m_case_args.push_back(arg);
 }
 

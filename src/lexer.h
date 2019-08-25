@@ -21,8 +21,13 @@ enum token_type
  CLOSE_BLOCK,
  CREATE,
  VAR,
- BOOLEAN,
- ARROW
+ ARROW,
+ CONTINUE,
+ IF,
+ ELIF,
+ ELSE,
+ IS,
+ TRUE
 };
 
 typedef struct token

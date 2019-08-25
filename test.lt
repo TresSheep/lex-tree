@@ -11,14 +11,19 @@ function_start ":"
 
 // global variables
 //data_section -> boolean
-//code_section -> boolean
+code_section -> boolean
+
+// obj block
+// {
+//   is_main -> boolean
+//   exprs   -> vector<expression>
+// }
 
 main:
-    identifier identifier separator identifier ()
-        create command ($1 $2 $4)
-
-     identifier identifier ()
-        create command ($1 $2)
-
-     separator function_start ()
-        create test ()
+    identifier function_start ()
+    {
+        if code_section is true
+	{
+            create function ($1)
+	}
+    }

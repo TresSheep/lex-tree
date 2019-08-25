@@ -15,6 +15,15 @@ void ast::parse()
   size_t line = 1;
   std::string label_name = "";
   std::vector<std::string> after_case;
+  bool in_main_block = false;
+  std::vector<std::string> tokens_to_come_after;
+  bool is_child = false;
+  std::vector<std::string> names;
+  std::vector<block_t*> blocks;
+  std::vector<statement*> cases;
+  std::vector<_if*> ifs;
+  std::vector<std::pair<std::string, statement*>> global_statements;
+  std::vector<statement*> case_exprs;
   
   for (auto position = 0; position < m_token_stream.size(); position++)
   {
@@ -62,23 +71,27 @@ void ast::parse()
 	if (m_token_stream[position+1].type == SEPARATOR)
 	{
 	  // Function
-
+	  
 	  if (!m_exprs.empty())
 	  {
-	    function f(label_name, std::move(m_exprs));
+	    function f(label_name, cases);
 	    f.generate_code(m_builder);
 	    m_exprs.clear();
+	    cases.clear();
+	    for (auto block : blocks)
+	      delete block;
+	    blocks.clear();
 	  }
 
 	  label_name = m_token_stream[position].content;
 
-	  position++;
+	  position += 1;
 	}
 	else if (m_token_stream[position+1].type == OPEN_P || m_token_stream[position+1].type == IDENTIFIER)
 	{
 	  // Case
 
-	  std::vector<std::string> names;
+	  names.clear();
 	  while (m_token_stream[position].type == IDENTIFIER)
 	  {
 	    names.push_back(m_token_stream[position].content);
@@ -87,7 +100,7 @@ void ast::parse()
 
 	  // Check if parent or declaration of what can come after
 	  
-	  bool is_child = false;
+	  is_child = false;
 	  for (auto name : names)
 	  {
 	    for (auto token : after_case)
@@ -101,19 +114,44 @@ void ast::parse()
 	  }
 
 	  position++;
-	  std::vector<std::string> tokens_to_come_after;
+	  tokens_to_come_after.clear();
 	  while (m_token_stream[position].type != CLOSE_P)
 	  {
 	    tokens_to_come_after.push_back(m_token_stream[position].content);
 	    position++;
 	  }
 
-	  // Add case
-	  m_exprs.push_back(std::move(std::make_unique<_case>(names, tokens_to_come_after, is_child)));
-	  if (!is_child)
+	  if (m_token_stream[position+1].type != OPEN_BLOCK)
 	  {
-	    after_case = tokens_to_come_after;
+	    if (m_token_stream[position+1].type != NEWLINE)
+	    {
+	      std::cout << "ERROR: expected \"{\" after \")\" in case! Line: " << line << "\n";
+	      exit(0);
+	    }
+	    else
+	      line++;
 	  }
+
+	  position++;
+
+	  block_t* blck = new block_t();
+	  blck->nested_pos = 1;
+	  blck->taken_care_of = false;
+	  blocks.push_back(blck);
+	}
+	else if (m_token_stream[position+1].type == ARROW)
+	{
+	  if (m_token_stream[position+2].type != IDENTIFIER)
+	  {
+	    std::cout << "ERROR: expected identifier after \"->\"! Line: " << line << "\n";
+	    exit(0);
+	  }
+
+	  // Parse variable
+	  var* v = new var(name, m_token_stream[position+2].content);
+	  global_statements.push_back(std::pair<std::string, statement*>(name, v));
+
+	  position += 2;
 	}
 	else
 	{
@@ -124,6 +162,30 @@ void ast::parse()
       case NEWLINE:
 	line++;
 	break;
+      case CLOSE_BLOCK:
+      {
+	// Close the back block
+
+	for (int i = blocks.size() - 1; i != -1; i--)
+	{
+	  if (!blocks[i]->taken_care_of)
+	  {
+	    if (blocks[i]->nested_pos == 1)
+	    {
+	      // Case
+	      _case* c = new _case(names, case_exprs);
+	      cases.push_back(c);
+	      case_exprs.clear();
+	    }
+	    else
+	    {
+	      case_exprs.push_back(blocks[i]->stmnt);
+	    }
+
+	    blocks[i]->taken_care_of = true;
+	  }
+	}
+      } break;
       case CREATE:
       {
 	std::vector<size_t> args_to_process;
@@ -167,8 +229,68 @@ void ast::parse()
 	    exit(0);
 	  }
 	}
-	
-	m_exprs.push_back(std::move(std::make_unique<create>(s1, args_to_process)));
+
+	create* _create = new create(s1, args_to_process);
+	blocks.back()->statements.push_back(_create);
+      } break;
+      case IF:
+      {
+	std::string lhs = m_token_stream[position+1].content;
+	if (m_token_stream[position+1].type != IDENTIFIER)
+	{
+	  std::cout << "ERROR: expected identifier after \"if\"! Line: " << line << "\n";
+	  exit(0);
+	}
+
+	// Check if it is a global statement
+	bool found = false;
+	for (auto stmnt : global_statements)
+	{
+	  if (stmnt.first.compare(lhs) == 0)
+	    found = true;
+	}
+
+	if (!found)
+	{
+	  std::cout << "ERROR: unexpected identifierfier: " << lhs << "! Line: " << line << "\n";
+	  exit(0);
+	}
+
+	if (m_token_stream[position+2].type != IS) // or is_not
+	{
+	  std::cout << "ERROR: expected \"is\" in \"if\"! Line: " << line << "\n";
+	  exit(0);
+	}
+	std::string type = m_token_stream[position+2].content;
+
+	if (m_token_stream[position+3].type != TRUE) // or false
+	{
+	  std::cout << "ERROR: expected \"true\" or \"false\" in \"if\"! Line: " << line << "\n";
+	  exit(0);
+	}
+	std::string rhs = m_token_stream[position+3].content;
+
+	if (m_token_stream[position+4].type != OPEN_BLOCK)
+	{
+	  if (m_token_stream[position+4].type != NEWLINE)
+	  {
+	    std::cout << "ERROR: expected \"true\" or \"false\" in \"if\"! Line: " << line << "\n";
+	    exit(0);
+	  }
+	  else
+	    line++;
+	}
+
+	position += 4;
+
+	block_t* blck = new block_t();
+	_if* i = new _if(lhs, type, rhs, blck->statements);
+	blck->stmnt = i;
+	blck->nested_pos = blocks.back()->nested_pos + 1;
+	blck->taken_care_of = false;
+
+	blocks.push_back(blck);
+	// Parse logic
       } break;
       default:
 	std::cout << "ERROR: unexpeted token: " << m_token_stream[position].content << "! Line: " << line << "\n";
@@ -177,8 +299,12 @@ void ast::parse()
       }
     }
   }
-
-  function f(label_name, std::move(m_exprs));
+  
+  function f(label_name, cases);
   f.generate_code(m_builder);
   m_exprs.clear();
+  cases.clear();
+  for (auto block : blocks)
+    delete block;
+  blocks.clear();
 }

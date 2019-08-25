@@ -8,7 +8,9 @@ CMakeFiles/lt.dir/src/ast.cpp.o
  /home/edvin/lex-tree/src/ast/create.h
  /home/edvin/lex-tree/src/ast/expression.h
  /home/edvin/lex-tree/src/ast/function.h
+ /home/edvin/lex-tree/src/ast/if.h
  /home/edvin/lex-tree/src/ast/statement.h
+ /home/edvin/lex-tree/src/ast/var.h
  /home/edvin/lex-tree/src/builder.h
  /home/edvin/lex-tree/src/lexer.h
 CMakeFiles/lt.dir/src/ast/case.cpp.o
@@ -26,6 +28,16 @@ CMakeFiles/lt.dir/src/ast/function.cpp.o
  /home/edvin/lex-tree/src/ast/function.h
  /home/edvin/lex-tree/src/ast/statement.h
  src/builder.h
+CMakeFiles/lt.dir/src/ast/if.cpp.o
+ /home/edvin/lex-tree/src/ast/if.cpp
+ /home/edvin/lex-tree/src/ast/if.h
+ /home/edvin/lex-tree/src/ast/statement.h
+ src/builder.h
+CMakeFiles/lt.dir/src/ast/var.cpp.o
+ /home/edvin/lex-tree/src/ast/statement.h
+ /home/edvin/lex-tree/src/ast/var.cpp
+ /home/edvin/lex-tree/src/ast/var.h
+ src/builder.h
 CMakeFiles/lt.dir/src/builder.cpp.o
  /home/edvin/lex-tree/src/builder.cpp
  /home/edvin/lex-tree/src/builder.h
@@ -38,7 +50,9 @@ CMakeFiles/lt.dir/src/main.cpp.o
  /home/edvin/lex-tree/src/ast/create.h
  /home/edvin/lex-tree/src/ast/expression.h
  /home/edvin/lex-tree/src/ast/function.h
+ /home/edvin/lex-tree/src/ast/if.h
  /home/edvin/lex-tree/src/ast/statement.h
+ /home/edvin/lex-tree/src/ast/var.h
  /home/edvin/lex-tree/src/builder.h
  /home/edvin/lex-tree/src/lexer.h
  /home/edvin/lex-tree/src/main.cpp

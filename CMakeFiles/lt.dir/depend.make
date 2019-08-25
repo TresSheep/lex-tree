@@ -7,7 +7,9 @@ CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/case.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/create.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/expression.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/function.h
+CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/if.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/statement.h
+CMakeFiles/lt.dir/src/ast.cpp.o: src/ast/var.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/builder.h
 CMakeFiles/lt.dir/src/ast.cpp.o: src/lexer.h
 
@@ -26,6 +28,16 @@ CMakeFiles/lt.dir/src/ast/function.cpp.o: src/ast/function.h
 CMakeFiles/lt.dir/src/ast/function.cpp.o: src/ast/statement.h
 CMakeFiles/lt.dir/src/ast/function.cpp.o: src/builder.h
 
+CMakeFiles/lt.dir/src/ast/if.cpp.o: src/ast/if.cpp
+CMakeFiles/lt.dir/src/ast/if.cpp.o: src/ast/if.h
+CMakeFiles/lt.dir/src/ast/if.cpp.o: src/ast/statement.h
+CMakeFiles/lt.dir/src/ast/if.cpp.o: src/builder.h
+
+CMakeFiles/lt.dir/src/ast/var.cpp.o: src/ast/statement.h
+CMakeFiles/lt.dir/src/ast/var.cpp.o: src/ast/var.cpp
+CMakeFiles/lt.dir/src/ast/var.cpp.o: src/ast/var.h
+CMakeFiles/lt.dir/src/ast/var.cpp.o: src/builder.h
+
 CMakeFiles/lt.dir/src/builder.cpp.o: src/builder.cpp
 CMakeFiles/lt.dir/src/builder.cpp.o: src/builder.h
 
@@ -37,7 +49,9 @@ CMakeFiles/lt.dir/src/main.cpp.o: src/ast/case.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/create.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/expression.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/function.h
+CMakeFiles/lt.dir/src/main.cpp.o: src/ast/if.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/ast/statement.h
+CMakeFiles/lt.dir/src/main.cpp.o: src/ast/var.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/builder.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/lexer.h
 CMakeFiles/lt.dir/src/main.cpp.o: src/main.cpp

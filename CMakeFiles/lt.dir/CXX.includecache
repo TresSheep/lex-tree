@@ -6,11 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/edvin/lex-tree/src/builder.cpp
-builder.h
-/home/edvin/lex-tree/src/builder.h
+/home/edvin/lex-tree/src/ast/create.cpp
+create.h
+/home/edvin/lex-tree/src/ast/create.h
 
-/home/edvin/lex-tree/src/builder.h
+/home/edvin/lex-tree/src/ast/create.h
+builder.h
+/home/edvin/lex-tree/src/ast/builder.h
+statement.h
+/home/edvin/lex-tree/src/ast/statement.h
+vector
+-
+
+/home/edvin/lex-tree/src/ast/if.cpp
+if.h
+/home/edvin/lex-tree/src/ast/if.h
+
+/home/edvin/lex-tree/src/ast/if.h
+builder.h
+/home/edvin/lex-tree/src/ast/builder.h
+statement.h
+/home/edvin/lex-tree/src/ast/statement.h
+vector
+-
+
+/home/edvin/lex-tree/src/ast/statement.h
+builder.h
+/home/edvin/lex-tree/src/ast/builder.h
+
+src/builder.h
 string
 -
 vector

@@ -49,7 +49,7 @@ void lexer::lex(std::string str)
       m_token_stream.push_back(token);
       position = str.length(); // Comment
     }
-    else if (str[position] == ' ')
+    else if (str[position] == ' ' || str[position] == '\t')
       position += 0; // Do nothing
     else if (str[position] == '\n' || str[position] == '\r')
     {
@@ -123,6 +123,14 @@ void lexer::lex(std::string str)
       m_token_stream.push_back(token);
       position += 4;
     }
+    else if (str[position] == '.' && str[position+1] == '.' && str[position+2] == '.')
+    {
+      token_t token;
+      token.type = CONTINUE;
+      token.content = "...";
+      m_token_stream.push_back(token);
+      position += 2;
+    }
     else if (str[position] == '\"')
     {
       position++;
@@ -146,13 +154,45 @@ void lexer::lex(std::string str)
       m_token_stream.push_back(token);
       position += 5;
     }
-    else if (str[position] == 'b' && str[position+1] == 'o' && str[position+2] == 'o' && str[position+3] == 'l' && str[position+4] == 'e' && str[position+5] == 'a' && str[position+6] == 'n')
+    else if (str[position] == 'i' && str[position+1] == 'f')
     {
       token_t token;
-      token.type = BOOLEAN;
-      token.content = "boolean";
+      token.type = IF;
+      token.content = "if";
       m_token_stream.push_back(token);
-      position += 6;
+      position += 1;
+    }
+    else if (str[position] == 'e' && str[position+1] == 'l' && str[position+2] == 'i' && str[position+3] == 'f')
+    {
+      token_t token;
+      token.type = ELIF;
+      token.content = "elif";
+      m_token_stream.push_back(token);
+      position += 5;
+    }
+    else if (str[position] == 'e' && str[position+1] == 'l' && str[position+2] == 's' && str[position+3] == 'e')
+    {
+      token_t token;
+      token.type = ELSE;
+      token.content = "else";
+      m_token_stream.push_back(token);
+      position += 3;
+    }
+    else if (str[position] == 'i' && str[position+1] == 's')
+    {
+      token_t token;
+      token.type = IS;
+      token.content = "is";
+      m_token_stream.push_back(token);
+      position += 1;
+    }
+    else if (str[position] == 't' && str[position+1] == 'r' && str[position+2] == 'u' && str[position+3] == 'e')
+    {
+      token_t token;
+      token.type = TRUE;
+      token.content = "true";
+      m_token_stream.push_back(token);
+      position += 3;
     }
     else if (IS_HIGH_ALPHA(str[position]) || IS_LOW_ALPHA(str[position])) {
       token_t token;

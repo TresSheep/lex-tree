@@ -7,7 +7,17 @@
 #include "ast/statement.h"
 #include "ast/case.h"
 #include "ast/create.h"
+#include "ast/if.h"
+#include "ast/var.h"
 #include <memory>
+
+typedef struct block
+{
+  statement* stmnt;
+  size_t nested_pos;
+  std::vector<statement*> statements;
+  bool taken_care_of;
+} block_t;
 
 class ast
 {
@@ -21,6 +31,6 @@ class ast
   std::vector<token_t> m_token_stream;
   size_t m_line;
   builder& m_builder;
-  std::vector<std::unique_ptr<statement>> m_exprs;
+  std::vector<statement*> m_exprs;
   std::unique_ptr<expression> m_expression;
 };

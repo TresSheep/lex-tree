@@ -9,7 +9,6 @@
 typedef struct case_arg
 {
   std::vector<std::string> call_stack;
-  std::vector<std::string> after;
   std::string create;
 } case_arg_t;
 
@@ -31,7 +30,7 @@ class builder
   void add_function_start(std::string name);
   void add_function_end();
 
-  void add_case(std::vector<std::string> args, std::vector<std::string> tokens_to_come_after, bool child);
+  void add_case(std::vector<std::string> args);
 
   void add_create(std::string obj, std::vector<size_t> args);
   
